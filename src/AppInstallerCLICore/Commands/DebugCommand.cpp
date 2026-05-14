@@ -10,6 +10,7 @@
 #include <winrt/Microsoft.Management.Configuration.SetProcessorFactory.h>
 #include "AppInstallerDownloader.h"
 #include "Sixel.h"
+#include <winget/Certificates.h>
 
 using namespace AppInstaller::CLI::Execution;
 
@@ -64,6 +65,7 @@ namespace AppInstaller::CLI
             std::make_unique<DumpErrorResourceCommand>(FullName()),
             std::make_unique<ShowSixelCommand>(FullName()),
             std::make_unique<ProgressCommand>(FullName()),
+            std::make_unique<GetSignerCommand>(FullName()),
             std::make_unique<LogViewerTestCommand>(FullName()),
             std::make_unique<DebugDscResourceCommand>(FullName()),
         });
@@ -370,6 +372,30 @@ namespace AppInstaller::CLI
         }
     }
 
+    std::vector<Argument> GetSignerCommand::GetArguments() const
+    {
+        return {
+            Argument{ "file", 'f', Args::Type::Manifest, Resource::String::SourceListUpdatedNever, ArgumentType::Positional },
+        };
+    }
+
+    Resource::LocString GetSignerCommand::ShortDescription() const
+    {
+        return Utility::LocIndString("Get signer information"sv);
+    }
+
+    Resource::LocString GetSignerCommand::LongDescription() const
+    {
+        return Utility::LocIndString("Gets the signing information for a given path."sv);
+    }
+
+    void GetSignerCommand::ExecuteInternal(Execution::Context& context) const
+    {
+        std::string subject = Certificates::GetAuthenticodeSubject(context.Args.GetArg(Args::Type::Manifest));
+
+        context.Reporter.Info() << "Subject: " << subject << std::endl;
+    }
+    
 // ── LogViewerTestCommand ─────────────────────────────────────────────────────
 
 #define WINGET_DEBUG_LOG_VIEWER_FOLLOW Args::Type::Force

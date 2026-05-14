@@ -26,6 +26,7 @@ apfn
 apicontract
 apiset
 appdata
+APPEXECLINK
 appinstallertest
 applic
 appname
@@ -192,6 +193,7 @@ FONTHASH
 FORPARSING
 foundfr
 fsanitize
+Fsctl
 FULLMUTEX
 FULLWIDTH
 fundraiser
@@ -531,6 +533,7 @@ SETTINGMAPPING
 sev
 sfs
 sfsclient
+SGNR
 SHCONTF
 shellapi
 SHGDN
@@ -639,6 +642,7 @@ vns
 vscodeignore
 vsconfig
 vstest
+vswhere
 waitable
 wal
 wcex
@@ -666,6 +670,7 @@ wingetutil
 winreg
 winrtact
 winstring
+wintrust
 WMI
 wmmc
 wnd
@@ -681,6 +686,7 @@ wsb
 wsl
 wsv
 wto
+WVT
 wwinmain
 WZDNCRFJ
 xcopy
